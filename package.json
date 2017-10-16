@@ -1,0 +1,33 @@
+{
+  "name": "weather",
+  "author": "Evan Fleet",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
+  },
+  "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.48.4",
+    "react-navigation": "^1.0.0-beta.13",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-persist": "^4.10.1",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "eslint": "^4.9.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "react-test-renderer": "16.0.0-alpha.12"
+  }
+}
