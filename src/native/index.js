@@ -12,14 +12,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    /*
     persistStore(store, {
       storage: AsyncStorage,
       blacklist: ['router']
     }, () => {
       this.setState({ ready: true });
     });
-    */
   }
 
   render() {

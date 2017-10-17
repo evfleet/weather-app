@@ -11,4 +11,11 @@ const store = createStore(reducer, composeWithDevTools(
   autoRehydrate()
 ));
 
+if (module.hot) {
+  module.hot.accept(() => {
+    const nextReducer = require('../reducers').default;
+    store.replaceReducer(nextReducer);
+  });
+}
+
 export default store;

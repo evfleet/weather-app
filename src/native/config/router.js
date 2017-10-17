@@ -1,33 +1,21 @@
 import React, { Component } from 'react';
 import { BackHandler } from 'react-native';
-import { addNavigationHelpers, NavigationActions, DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation';
+import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import Onboard from '../screens/Onboard';
-import Today from '../screens/Today';
-import Hourly from '../screens/Hourly';
-import Daily from '../screens/Daily';
+import Weather from '../screens/Weather';
 import Settings from '../screens/Settings';
 
-const WeatherNavigation = TabNavigator({
-  Today: {
-    screen: Today
-  },
-  Hourly: {
-    screen: Hourly
-  },
-  Daily: {
-    screen: Daily
-  }
-});
-
-const SettingsNavigation = DrawerNavigator({
+const SettingsNavigation = StackNavigator({
   Weather: {
-    screen: WeatherNavigation
+    screen: Weather
   },
   Settings: {
     screen: Settings
   }
+}, {
+  mode: 'modal'
 });
 
 export const AppNavigation = StackNavigator({
@@ -38,7 +26,10 @@ export const AppNavigation = StackNavigator({
     screen: SettingsNavigation
   }
 }, {
-  headerMode: 'none'
+  headerMode: 'none',
+  navigationOptions: {
+    gesturesEnabled: false
+  }
 });
 
 @connect(

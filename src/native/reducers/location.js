@@ -1,6 +1,7 @@
 const initialState = {
   name: null,
-  position: null
+  coords: null,
+  error: null
 };
 
 export default (state = initialState, action) => {

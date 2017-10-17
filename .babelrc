@@ -1,12 +1,23 @@
 {
-  "presets": ["babel-preset-react-native-stage-0/decorator-support"],
-  "plugins": [
-    "transform-class-properties"
-  ],
   "env": {
     "development": {
+      "presets": ["babel-preset-react-native-stage-0/decorator-support"],
       "plugins": [
-        "transform-react-jsx-source"
+        "transform-react-jsx-source",
+        "transform-class-properties"
+      ]
+    },
+    "production": {
+      "presets": ["babel-preset-react-native-stage-0/decorator-support"],
+      "plugins": [
+        "transform-class-properties"
+      ]
+    },
+    "server": {
+      "presets": ["env"],
+      "plugins": [
+        "transform-object-rest-spread",
+        "transform-runtime"
       ]
     }
   }
