@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
+
+@connect(
+  ({ location }) => ({ location })
+)
 
 class Weather extends Component {
-  static navigationOptions = (props) => {
-    console.log(props);
-
-    return {
-      title: 'Location thing',
-      headerRight: <Text>Yo</Text>
-    };
-  }
+  static navigationOptions = (props) => ({
+    title: props.navigation.state.params.name
+  })
 
   render() {
-    console.log('Weather');
-
     return (
       <View>
         <Text>Weather</Text>

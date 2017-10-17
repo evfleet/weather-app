@@ -1,3 +1,5 @@
+import { NavigationActions } from 'react-navigation';
+
 import * as actionTypes from './types';
 
 /*
@@ -20,15 +22,33 @@ export const getLocationFromCoords = ({ latitude, longitude }) => {
         })
       }).then((r) => r.json());
 
-      console.log(response);
+      if ('error' in response) {
+        return dispatch({
+          type: actionTypes.SET_LOCATION_FAIL,
+          payload: {
+            error: response.error.message
+          }
+        });
+      }
 
-      return dispatch({
-        type: actionTypes.SET_LOCATION_PASS
+      dispatch({
+        type: actionTypes.SET_LOCATION_PASS,
+        payload: response.data
       });
+
+      dispatch(NavigationActions.navigate({
+        routeName: 'Weather',
+        params: {
+          name: response.data.name
+        }
+      }));
     } catch (error) {
       console.log('error', error);
       return dispatch({
-        type: actionTypes.SET_LOCATION_FAIL
+        type: actionTypes.SET_LOCATION_FAIL,
+        payload: {
+          error: 'Unexpected server error'
+        }
       });
     }
   };

@@ -14,13 +14,13 @@ app.post('/api/location/coords', async (req, res) => {
   const { latitude, longitude } = req.body;
 
   try {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${constants.GOOGLE_KEY}`).then((r) => r.json());
+    const { status, results } = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${constants.GOOGLE_KEY}`).then((r) => r.json());
 
-    if (response.results[0]) {
+    if (status === 'OK') {
       let locality;
       let adminArea;
 
-      response.results[0].address_components.map((component) => {
+      results[0].address_components.map((component) => {
         if (component.types.includes('locality')) {
           locality = component.long_name;
         } else if (component.types.includes('administrative_area_level_1')) {
@@ -36,13 +36,16 @@ app.post('/api/location/coords', async (req, res) => {
         }
       }));
     } else {
-      console.log('no result');
+      throw new Error(status);
     }
   } catch (error) {
-    console.log(error);
+    switch (error.message) {
+      case 'ZERO_RESULTS':
+      case 'OVER_QUERY_LIMIT':
+      default:
+        return res.json(createAPIResponse(false, 'Unexpected server error', 500));
+    }
   }
-
-  res.json({});
 });
 
 app.post('/api/location/address', async (req, res) => {

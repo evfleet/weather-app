@@ -8,11 +8,7 @@ import { NavigationActions } from 'react-navigation';
 import * as actions from '../../actions';
 
 @connect(
-  ({ location }) => ({ location }),
-  (dispatch) => ({ actions: bindActionCreators({
-    getLocationFromCoords: actions.getLocationFromCoords,
-    getLocationFromAddress: actions.getLocationFromAddress
-  }, dispatch) })
+  ({ location }) => ({ location })
 )
 
 class Onboard extends Component {
@@ -26,14 +22,24 @@ class Onboard extends Component {
     }
   }
 
-  componentWillMount() {
-    const { location: { name, coords } } = this.props;
+  componentWillReceiveProps(nextProps, nextState) {
+    console.log('nextProps', nextProps);
+    console.log('nextState', nextState);
+
+    console.log('this props', this.props);
+
+    const { location: { name, coords } } = nextProps;
 
     if (name && coords) {
       this.props.dispatch(NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'Weather' })
+          NavigationActions.navigate({
+            routeName: 'Weather',
+            params: {
+              name
+            }
+          })
         ]
       }));
     }
@@ -60,7 +66,7 @@ class Onboard extends Component {
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         if (coords) {
-          this.props.actions.getLocationFromCoords(coords);
+          this.props.dispatch(actions.getLocationFromCoords(coords));
         }
 
         console.log('position', coords);
