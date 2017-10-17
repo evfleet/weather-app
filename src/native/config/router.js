@@ -3,7 +3,7 @@ import { BackHandler } from 'react-native';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import Onboard from '../screens/Onboard';
+import Landing from '../screens/Landing';
 import Weather from '../screens/Weather';
 import Settings from '../screens/Settings';
 
@@ -19,8 +19,8 @@ const SettingsNavigation = StackNavigator({
 });
 
 export const AppNavigation = StackNavigator({
-  Onboard: {
-    screen: Onboard
+  Landing: {
+    screen: Landing
   },
   Weather: {
     screen: SettingsNavigation

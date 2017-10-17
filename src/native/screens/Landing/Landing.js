@@ -8,11 +8,12 @@ import { NavigationActions } from 'react-navigation';
 import * as actions from '../../actions';
 
 @connect(
-  ({ location }) => ({ location })
+  ({ ui, location }) => ({ ui, location })
 )
 
-class Onboard extends Component {
+class Landing extends Component {
   state = {
+    isReady: false,
     input: {
       value: '',
       error: null
@@ -23,33 +24,23 @@ class Onboard extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    console.log('nextProps', nextProps);
-    console.log('nextState', nextState);
-
-    console.log('this props', this.props);
-
     const { location: { name, coords } } = nextProps;
 
     if (name && coords) {
-      this.props.dispatch(NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({
-            routeName: 'Weather',
-            params: {
-              name
-            }
-          })
-        ]
-      }));
+      setTimeout(() => {
+        this.props.dispatch(NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({
+              routeName: 'Weather',
+              params: {
+                name
+              }
+            })
+          ]
+        }));
+      }, 1500);
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState !== this.state) {
-      return true;
-    }
-    return false;
   }
 
   handleInputChange = (value) => {
@@ -68,14 +59,9 @@ class Onboard extends Component {
         if (coords) {
           this.props.dispatch(actions.getLocationFromCoords(coords));
         }
-
-        console.log('position', coords);
       },
       (error) => {
         console.log('error', error);
-      },
-      {
-        enableHighAccuracy: true
       }
     );
   }
@@ -85,32 +71,38 @@ class Onboard extends Component {
   }
 
   render() {
-    const { input: { value, error } } = this.state;
+    const { isReady, input: { value, error } } = this.state;
+    const { ui: { rehydrated } } = this.props;
 
     console.log(this.props);
 
     return (
       <View style={styles.container}>
-        <Text>Onboard</Text>
+        {!rehydrated && !isReady ? (
+          <Text>Loading</Text>
+        ) : (
+          <View>
+            <Text>Landing</Text>
 
-        <View style={styles['input__wrapper']}>
-          <TextInput
-            style={styles.input}
-            value={value}
-            onChangeText={this.handleInputChange}
-          />
-        </View>
+            <View style={styles['input__wrapper']}>
+              <TextInput
+                style={styles.input}
+                value={value}
+                onChangeText={this.handleInputChange}
+              />
+            </View>
 
-        <Button
-          title="Search"
-          onPress={this.handleSubmitPress}
-        />
+            <Button
+              title="Search"
+              onPress={this.handleSubmitPress}
+            />
 
-        <Button
-          title="Find Location"
-          onPress={this.handleLocatePress}
-        />
-
+            <Button
+              title="Find Location"
+              onPress={this.handleLocatePress}
+            />
+          </View>
+        )}
       </View>
     );
   }
@@ -132,4 +124,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Onboard;
+export default Landing;

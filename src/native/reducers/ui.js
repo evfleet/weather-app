@@ -8,6 +8,11 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case REHYDRATE:
+      return {
+        rehydrated: true
+      };
+
     default:
       return state;
   }
