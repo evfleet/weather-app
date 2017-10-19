@@ -6,11 +6,10 @@ import { bindActionCreators } from 'redux';
 
 import * as actions from '../../actions';
 
-// @connect(({ ui, position }) => ({ ui, position }))
+@connect(({ position }) => ({ position }))
 
 class Onboard extends Component {
   state = {
-    isReady: false,
     input: {
       value: '',
       error: null
@@ -29,9 +28,10 @@ class Onboard extends Component {
 
   handleLocatePress = () => {
     navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
+      async ({ coords }) => {
         if (coords) {
-          this.props.dispatch(actions.getLocationFromCoords(coords));
+          await this.props.dispatch(actions.getLocationFromCoords(coords));
+          this.props.history.replace('/');
         }
       },
       (error) => {
@@ -41,47 +41,31 @@ class Onboard extends Component {
   }
 
   handleSubmitPress = () => {
-    // this.props.dispatch(NavigationActions.navigate({ routeName: 'Weather' }));
+
   }
 
   render() {
-    /*
-    const { isReady, input: { value, error } } = this.state;
-    const { ui: { rehydrated } } = this.props;
-    */
-
-    console.log('onboard', this.props);
+    const { input: { value, error } } = this.state;
 
     return (
       <View style={styles.container}>
-        <Text>Onboard</Text>
-        {/*
-        !rehydrated ? (
-          <Text>Loading</Text>
-        ) : (
-          <View>
-            <Text>Landing</Text>
+        <View style={styles['input__wrapper']}>
+          <TextInput
+            style={styles.input}
+            value={value}
+            onChangeText={this.handleInputChange}
+          />
+        </View>
 
-            <View style={styles['input__wrapper']}>
-              <TextInput
-                style={styles.input}
-                value={value}
-                onChangeText={this.handleInputChange}
-              />
-            </View>
+        <Button
+          title="Search"
+          onPress={this.handleSubmitPress}
+        />
 
-            <Button
-              title="Search"
-              onPress={this.handleSubmitPress}
-            />
-
-            <Button
-              title="Find Location"
-              onPress={this.handleLocatePress}
-            />
-          </View>
-        )}
-        */}
+        <Button
+          title="Find Location"
+          onPress={this.handleLocatePress}
+        />
       </View>
     );
   }
@@ -99,7 +83,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#CCCCCC'
   }
 });
 

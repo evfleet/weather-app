@@ -24,7 +24,7 @@ export const getLocationFromCoords = ({ latitude, longitude }) => {
         });
       }
 
-      dispatch({
+      return dispatch({
         type: actionTypes.SET_LOCATION_PASS,
         payload: response.data
       });
