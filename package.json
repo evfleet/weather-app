@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:ios": "BABEL_ENV=native react-native run-ios",
+    "start:ios": "react-native run-ios",
     "start:server": "BABEL_ENV=server nodemon --watch src/server src/server/index.js --exec babel-node"
   },
   "dependencies": {
@@ -13,8 +13,11 @@
     "node-fetch": "^1.7.3",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.48.4",
-    "react-navigation": "^1.0.0-beta.13",
+    "react-native-navbar": "^2.0.1",
+    "react-native-vector-icons": "^4.4.2",
     "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-native": "^4.2.0",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-persist": "^4.10.1",

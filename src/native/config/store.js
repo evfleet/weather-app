@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { autoRehydrate, persistStore } from 'redux-persist';
+import { autoRehydrate } from 'redux-persist';
 
 import thunk from 'redux-thunk';
 
@@ -11,10 +11,6 @@ const store = createStore(reducer, composeWithDevTools(
   applyMiddleware(thunk),
   autoRehydrate()
 ));
-
-persistStore(store, {
-  storage: AsyncStorage
-});
 
 if (module.hot) {
   module.hot.accept(() => {

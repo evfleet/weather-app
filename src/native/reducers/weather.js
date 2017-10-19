@@ -1,5 +1,7 @@
 const initialState = {
-
+  current: null,
+  hourly: null,
+  daily: null
 };
 
 export default (state = initialState, action) => {

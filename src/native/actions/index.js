@@ -1,11 +1,4 @@
-import { NavigationActions } from 'react-navigation';
-
 import * as actionTypes from './types';
-
-/*
-  export const SET_LOCATION_PASS = 'SET_LOCATION_PASS';
-  export const SET_LOCATION_FAIL = 'SET_LOCATION_FAIL';
-*/
 
 export const getLocationFromCoords = ({ latitude, longitude }) => {
   return async (dispatch) => {
@@ -35,13 +28,6 @@ export const getLocationFromCoords = ({ latitude, longitude }) => {
         type: actionTypes.SET_LOCATION_PASS,
         payload: response.data
       });
-
-      dispatch(NavigationActions.navigate({
-        routeName: 'Weather',
-        params: {
-          name: response.data.name
-        }
-      }));
     } catch (error) {
       console.log('error', error);
       return dispatch({

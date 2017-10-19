@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-@connect(
-  ({ location }) => ({ location })
-)
-
 class Weather extends Component {
-  static navigationOptions = (props) => ({
-    title: props.navigation.state.params.name
-  })
-
   render() {
+    console.log('weather', this.props);
+
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Weather</Text>
       </View>
     );
