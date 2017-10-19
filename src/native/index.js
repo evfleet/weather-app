@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    AsyncStorage.clear();
+    // AsyncStorage.clear();
   }
 
   componentDidMount() {

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 
 class Settings extends Component {
   render() {
+    console.log('settings');
+
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Settings</Text>
+
+        <Button title="Weather" onPress={() => this.props.history.goBack()} />
+
       </View>
     );
   }

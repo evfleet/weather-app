@@ -3778,7 +3778,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -3888,6 +3888,12 @@ react-native-navbar@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-native-navbar/-/react-native-navbar-2.0.1.tgz#f92098b3748b64430b803e3c3fe3666f2d3b45cb"
   dependencies:
     prop-types "^15.5.10"
+
+react-native-tab-view@^0.0.69:
+  version "0.0.69"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.69.tgz#f52d4354a98a382f10eb5fcf61db5216c91dc7e7"
+  dependencies:
+    prop-types "^15.5.8"
 
 react-native-vector-icons@^4.4.2:
   version "4.4.2"
@@ -4002,6 +4008,10 @@ react-redux@^5.0.6:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
+
+react-router-native-stack@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-router-native-stack/-/react-router-native-stack-0.0.4.tgz#8199eaba04774aad2e8634918b30961303571e9c"
 
 react-router-native@^4.2.0:
   version "4.2.0"

@@ -10,7 +10,6 @@ class Root extends Component {
       <NativeRouter>
         <Switch>
           <Route
-            exact
             path="/"
             component={ Landing }
           />

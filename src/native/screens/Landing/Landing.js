@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { NativeRouter, Redirect, Route, Switch } from 'react-router-native';
+import { NativeRouter, Redirect, Route } from 'react-router-native';
+import Stack from 'react-router-native-stack';
 
 import Weather from './screens/Weather';
 import Settings from './screens/Settings';
@@ -19,7 +19,9 @@ class Landing extends Component {
     }
 
     return (
-      <Switch>
+      <Stack
+        gestureEnabled={false}
+      >
         <Route
           exact
           path="/"
@@ -30,7 +32,7 @@ class Landing extends Component {
           path="/settings"
           component={ Settings }
         />
-      </Switch>
+      </Stack>
     );
   }
 }
