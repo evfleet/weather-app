@@ -17,10 +17,18 @@ app.post('/api/weather', utils.requireParams('latitude', 'longitude'), async (re
 
     // format out useless data later
 
+    const time = Math.floor(Date.now() / 1000);
+
     return res.json(utils.createAPIResponse(true, {
       currently,
-      hourly,
-      daily,
+      hourly: {
+        time,
+        ...hourly
+      },
+      daily: {
+        time,
+        ...daily
+      },
       alerts: alerts || null
     }));
   } catch (error) {

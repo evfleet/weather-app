@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import NavigationBar from 'react-native-navbar';
-import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabViewAnimated, TabBar } from 'react-native-tab-view';
+
+import * as actions from '../../../../actions';
 
 import Current from './screens/Current';
 import Hourly from './screens/Hourly';
@@ -12,10 +14,14 @@ class Weather extends Component {
   state = {
     index: 0,
     routes: [
-      { key: '1', title: 'Current' },
-      { key: '2', title: 'Hourly' },
-      { key: '3', title: 'Weekly' }
+      { key: 'current', title: 'Current' },
+      { key: 'hourly', title: 'Hourly' },
+      { key: 'weekly', title: 'Forecast' }
     ]
+  }
+
+  componentDidMount() {
+    this.props.fetchWeather();
   }
 
   handleIndexChange = (index) => {
@@ -24,20 +30,34 @@ class Weather extends Component {
 
   renderFooter = (props) => <TabBar {...props} />
 
-  renderScene = SceneMap({
-    '1': Current,
-    '2': Hourly,
-    '3': Weekly
-  })
+  renderScene = ({ route }) => {
+    const { forecast } = this.props;
+
+    switch (route.key) {
+      case 'current':
+        return <Current currently={forecast.currently} />;
+
+      case 'hourly':
+        return <Hourly hourly={forecast.hourly} />;
+
+      case 'weekly':
+        return <Weekly daily={forecast.daily} />;
+
+      default:
+        return null;
+    }
+  }
 
   render() {
     console.log('weather', this.props);
+
+    const { name, forecast } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
         <NavigationBar
           tintColor="#000033"
-          title={{ title: 'Hello' }}
+          title={{ title: name }}
         />
 
         <TabViewAnimated

@@ -1,13 +1,22 @@
+import * as actionTypes from '../actions/types';
+
 const initialState = {
-  current: null,
+  currently: null,
   hourly: null,
-  daily: null
+  daily: null,
+  alerts: null
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case actionTypes.FETCH_WEATHER_PASS:
+      return payload;
+
+    case actionTypes.FETCH_WEATHER_FAIL:
+      return initialState;
+
     default:
       return state;
   }
